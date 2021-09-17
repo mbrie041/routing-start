@@ -13,21 +13,20 @@ const appRoutes: Routes = [
   {
     path: "users",
     component: UsersComponent,
-    children: [
-      { path: ":id/:name", component: UserComponent }, //localhost:4200/user1
-    ],
-  }, //localhost:4200/users
+    children: [{ path: ":id/:name", component: UserComponent }],
+  },
 
-  { path: "", component: HomeComponent }, //localhost:4200
+  { path: "", component: HomeComponent },
   {
     path: "servers",
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
     component: ServersComponent,
     children: [
-      { path: ":id", component: ServerComponent }, //localhost:4200/servers
+      { path: ":id", component: ServerComponent },
       { path: ":id/edit", component: EditServerComponent },
     ],
-  }, //localhost:4200/servers
+  },
   { path: "not-found", component: PageNotFoundComponent }, //not found route
   { path: "**", redirectTo: "/not-found" }, //wildcard
 ];
